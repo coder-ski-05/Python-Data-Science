@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+
+from sklearn import datasets
+from sklearn.decomposition import PCA
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+# Principle Component Analysis (PCA)
+# Numpy is to facilitae numeric operations
+
+# importing standard scale enables preprocessing 
+
+iris=datasets.load_iris()
+X=iris.data
+print(X.shape)
+
+# iris dataset is a multivariate data set. Multivariate encompasses 
+# the simonataious observation and analysis of more that one outcome variable
+
+# the shape method prints the dimension of the data set
+
+X_std=StandardScaler().fit_transform(X)
+
+# Standard scaler will standardize the data by using fit_transform()
+
+covmat=np.cov(X_std.T)
+print(covmat)
+
+# covmat with convert to a matrix then pass through the standardized data
+# in the previous line
+
+eigval,eigvec=np.linalg.eig(covmat)
+print(eigvec)
+print(eigval)
+
+# the console will display the eigvec and the eigval this time
+# you can still explore the values with variable explorer
+
+eigpairs=[(np.abs(eigval[i]),eigvec[:,i]) for i in range
+          (len(eigval))]
+
+# sort the eigenvalue in a decreasing order using ABS function
+# eigval is first argument being passed and it will be iterated
+# eigvec is the second arguement passed and iterated
+# then the for loop will iterate and arrange the records in a decreasing
+# order by the values by the length using the len()
+
+total=sum(eigval)
+# total sum of eigval
+
+varexp=[(i/total)*100 for i in sorted(eigval,reverse=True)]
+# expression takes responsibility to provide cumulative variance
+
+# a cumulative variance provides the right PCA to reduce the number of
+# components needed for analysis
+# reverse=True arranges in the decreasing order
+
+print(varexp)
+
+# console panel displays the actual reduction
