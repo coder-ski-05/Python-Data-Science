@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+
+dataseries=pd.Series(np.random.rand(30))
+#passing 30 as the limit for data series
+
+dataseries.head()
+#creates a basic row for the data series with default columns
+
+
+
+datawithfeatures=pd.DataFrame(np.random.randn(50,4),columns=list('Tars') )
+# specifies columns to the data series instead of default columns
+# TARS will label each of the 4 columns as T A R S
+
+datawithfeatures.head()
+dataseries.sample(n=4)
+sampleseries=dataseries.sample(n=4)
+sampleseries=dataseries.sample(frac=0.3,replace=True)
+# frac is for fraction to specify we want 30%
